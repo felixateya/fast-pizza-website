@@ -3,7 +3,7 @@ import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrder } from '../../services/apiRestaurant';
 import Button from '../../ui/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddress, getUser } from '../user/userSlice';
+import { fetchAddress} from '../user/userSlice';
 import { clearCart, getCart, getTotalCartPrice } from '../cart/cartSlice';
 import EmptyCart from '../cart/EmptyCart';
 import store from '../../store';
@@ -20,7 +20,7 @@ function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const {
-    username,
+    userName: username,
     status: addressStatus,
     position,
     address,
@@ -36,17 +36,17 @@ function CreateOrder() {
   const dispatch = useDispatch();
   if (!cart.length) return <EmptyCart />;
   return (
-    <div className="px-4 py-6">
+    <div className="flex flex-col  px-4 py-6">
       <h2 className="mb-8 text-xl font-semibold">
         Ready to order? Let&apos;s go!
       </h2>
 
       {/* <Form method="POST" action="/order/new"> */}
       <Form method="POST">
-        <div className="sm: mb-5 flex flex-col items-center gap-2 sm:flex-row">
-          <label className="sm: basis-40">First Name</label>
+        <div className="sm: mb-1 flex flex-col items-center gap-2 sm:flex-row">
+          <label className="sm:basis-40">First Name</label>
           <input
-            className="input grow"
+            className="input sm:grow"
             type="text"
             name="customer"
             defaultValue={username}
@@ -54,8 +54,8 @@ function CreateOrder() {
           />
         </div>
 
-        <div className="sm: mb-5 flex flex-col items-center gap-2 sm:flex-row">
-          <label className="sm: basis-40">Phone number</label>
+        <div className="sm:mb-5 flex flex-col items-center gap-2 sm:flex-row">
+          <label className="sm:basis-40">Phone number</label>
           <div className="grow">
             <input className="input w-full" type="tel" name="phone" required />
             {formErrors?.phone && (
@@ -67,7 +67,7 @@ function CreateOrder() {
         </div>
 
         <div className=" relative flex flex-col items-center gap-2 sm:mb-5 sm:flex-row">
-          <label className="sm: basis-40">Address</label>
+          <label className="sm:basis-40">Address</label>
           <div className="grow">
             <input
               className="input w-full"
