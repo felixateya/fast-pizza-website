@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Button from '../../ui/Button';
 import { useDispatch } from 'react-redux';
 import { updateName } from './userSlice';
@@ -8,13 +8,18 @@ function CreateUser() {
   const [username, setUsername] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  function handleSubmit(e) {
-    e.preventDefault();
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (!username) return;
+  //   dispatch(updateName(username));
+  //   navigate('/menu');
+  // }
+const handleSubmit = useCallback((e)=>{
+  e.preventDefault();
     if (!username) return;
     dispatch(updateName(username));
     navigate('/menu');
-  }
-
+},[username])
   return (
     <form onSubmit={handleSubmit}>
       <p className="text-stone=600 mb-4 text-sm md:text-base">
